@@ -56,6 +56,45 @@
         </div>
       </div>
     </section>
+      
+
+      <div class="container">
+        <!-- Channel Stats Section -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number" id="subscribers">134</div>
+                <div class="stat-label">Subscribers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👁️</div>
+                <div class="stat-number" id="views">93.2K</div>
+                <div class="stat-label">Total Views</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👍</div>
+                <div class="stat-number" id="likes">1.7K</div>
+                <div class="stat-label">Total Likes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎬</div>
+                <div class="stat-number" id="videos">97</div>
+                <div class="stat-label">Videos</div>
+            </div>
+        </div>
+
+        <!-- Top Content Section -->
+        <div class="section-header">
+            <h1 class="section-title">🔥 Top Content</h1>
+            <p class="section-subtitle">Our most popular videos that everyone loves</p>
+        </div>
+
+        <div class="videos-grid" id="videosGrid">
+            <!-- Videos will be populated here -->
+        </div>
+    </div>
+
+      
     
     <!-- Footer -->
     <canvas id="confetti-canvas"></canvas>
@@ -67,6 +106,100 @@
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
+      
+      <script>
+        // Sample video data - Replace with your actual videos
+        const topVideos = [
+            {
+                title: "Bumrah's Response 🥶🚀💥",
+                thumbnail: "https://img.youtube.com/vi/GGMokicwmeM/maxresdefault.jpg",
+                views: "8.5K",
+                likes: "53",
+                url: "https://youtube.com/shorts/GGMokicwmeM?si=GacL77HMIQxznLIa"    
+            },
+            {
+                title: "Bmw X Mercedes X Lamborghini 🥵🔥🥵",
+                thumbnail: "https://img.youtube.com/vi/l71iHzNbbtY/maxresdefault.jpg",
+                views: "3.4k",
+                likes: "116",
+                url: "https://youtube.com/shorts/l71iHzNbbtY?si=DIZMz4vKmun0Q9Bz"
+            },
+            {
+                title: "MSD: The Captain Cool 🔥🔥",
+                thumbnail: "https://img.youtube.com/vi/kJhfDOeXWIE/maxresdefault.jpg",
+                views: "2.6K",
+                likes: "76",
+                url: "https://youtube.com/shorts/kJhfDOeXWIE?si=08hE3pAfPgtRYWrp"
+            },
+            {
+                title: "The Amazing SpiderMan🕸️ Edit🔥💥",
+                thumbnail: "https://img.youtube.com/vi/yF5yoCW2YYE/maxresdefault.jpg",
+                views: "2.1K",
+                likes: "47",
+                url: "https://youtube.com/shorts/yF5yoCW2YYE?si=y14ZvteUO_Xybsme"
+            },
+            {
+                title: "Wukong's Aura ♾️☠️",
+                thumbnail: "https://img.youtube.com/vi/syzmHTdggWI/maxresdefault.jpg",
+                views: "2K",
+                likes: "34",
+                url: "https://youtube.com/shorts/syzmHTdggWI?si=eiJLH8lAgvflCf3q"
+            }
+        ];
+
+        // Populate videos
+        const videosGrid = document.getElementById('videosGrid');
+        
+        topVideos.forEach(video => {
+            const videoCard = document.createElement('div');
+            videoCard.className = 'video-card';
+            videoCard.onclick = () => window.open(video.url, '_blank');
+            
+            videoCard.innerHTML = `
+                <div class="video-thumbnail">
+                    <img src="${video.thumbnail}" alt="${video.title}" class="thumbnail-img">
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">${video.title}</h3>
+                    <div class="video-stats">
+                        <span class="video-stat">👁️ ${video.views}</span>
+                        <span class="video-stat">👍 ${video.likes}</span>
+                    </div>
+                </div>
+            `;
+            
+            videosGrid.appendChild(videoCard);
+        });
+
+        // Animate numbers on load
+        function animateNumber(elementId, target) {
+            const element = document.getElementById(elementId);
+            const suffix = element.textContent.replace(/[0-9.]/g, '');
+            const numericTarget = parseFloat(target);
+            let current = 0;
+            const increment = numericTarget / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= numericTarget) {
+                    element.textContent = target + suffix;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = current.toFixed(1) + suffix;
+                }
+            }, 20);
+        }
+
+        // Trigger animations on page load
+        window.addEventListener('load', () => {
+            animateNumber('subscribers', 134);
+            animateNumber('views', 93.2);
+            animateNumber('likes', 1.7);
+            animateNumber('videos', 97);
+        });
+    </script>
+
+
+      
 <script>
 const duration = 5 * 1000;
 const end = Date.now() + duration;
@@ -151,4 +284,5 @@ const end = Date.now() + duration;
 
 
 </body>
+
 </html>
